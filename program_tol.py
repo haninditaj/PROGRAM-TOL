@@ -2,19 +2,19 @@
 
 #IMPORT
 import os
-#direktori
+
+
 os.chdir(r'C:\Users\LENOVO\Desktop\PROGRAM TOL\data')
-#csv
+
 import csv
 
-#list kode kota
+#ubah csv ke list kode kota dan kode kendaraan
 list_kota = []
 with open('data_01_daftar_kota.csv') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=";")
     for row in csv_reader:
         list_kota.append(row)
 
-#list daftar kendaraan
 list_knd = []
 with open('data_02_daftar_kendaraan.csv') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=";")
@@ -22,11 +22,11 @@ with open('data_02_daftar_kendaraan.csv') as csv_file:
         list_knd.append(row)
     
 
-#menu 2
+#menu 1 (tabel)
 def tabel_1():
     print('')
-    print(' TABEL DAFTAR '.center(50))
-    print(' KODE KOTA DAN NAMA KOTA '.center(50))
+    print('TABEL DAFTAR'.center(50))
+    print('KODE KOTA DAN NAMA KOTA'.center(50))
     print('')
     print('-'*49)
     for i in range(len(list_kota)):
@@ -35,15 +35,15 @@ def tabel_1():
 
 def tabel_2():
     print('')
-    print(' TABEL DAFTAR '.center(50))
-    print(' KODE DAN JENIS KENDARAAN '.center(50))
+    print('TABEL DAFTAR'.center(50))
+    print('KODE DAN JENIS KENDARAAN'.center(50))
     print('')
     print('-'*49)
     for i in range(len(list_knd)):
         print(f'| {list_knd[i][0]:^14} | {list_knd[i][1]:^28} |',)
         print('-'*49)
 
-#menu 1
+#menu 2
 def mulai_estimasi():
     def tarif_golongan():
         def total_harga():
@@ -243,7 +243,7 @@ def mulai_estimasi():
         csv_writer = csv.writer(csv_file, delimiter=";")
         csv_writer.writerow(data)
 
-#main menu
+#main menu (menu utama)
 def main_menu():
     print("")
     print("="*50)
@@ -273,12 +273,12 @@ def main_menu():
         2. Kembali ke menu utama
 
         '''.center(50))
-        pilihan = int(input("Masukkan angka pada menu pilihan anda : "))
-        if pilihan == 1:
+        menu_utama = int(input("Masukkan angka pada menu pilihan anda : "))
+        if menu_utama == 1:
             mulai_estimasi()
             menu_utama = input("Tekan ENTER untuk kembali ke menu utama")
             main_menu()
-        elif pilihan == 2:
+        elif menu_utama == 2:
             main_menu()
         else:
             main_menu()
@@ -308,13 +308,19 @@ def extras():
                 csv_reader = csv.reader(csv_file, delimiter=";")
                 for row in csv_reader:
                     log_1.append(row)
+            print("="*50)
+            print(f'|{"NOMOR PLAT":<10}|{"KODE GOLONGAN":^14}|{"KOTA ASAL":^10}|{"KOTA TUJUAN":^11}|')
+            print("-"*50)
             for i in range(len(log_1)):
-                print(f'{log_1[i][0]:<20} \t \t {log_1[i][1]:^10} \t {log_1[i][2]:^10} \t {log_1[i][3]:^10}')
+                print(f'|{log_1[i][0]:<10}|{log_1[i][1]:^14}|{log_1[i][2]:^10}|{log_1[i][3]:^11}|')
+                print("-"*50)
         print("Lihat file log? (y / t)")
-        s_log = input("".lower())
-        if s_log == "y":
+        s_log = input("")
+        s_log_2 = s_log.lower()
+        if s_log_2 == "y":
             print("")
-            print("FILE LOG")
+            print("FILE LOG".center(50))
+            print("-------------".center(50))
             print("")
             show_log()
             input("Tekan ENTER untuk kembali")
@@ -328,16 +334,18 @@ def extras():
             with open('log_data.csv', 'w', newline='') as csv_file:
                 csv_writer = csv.writer(csv_file, delimiter=";")
                 csv_writer.writerow(data)
-        print("Masukkan password untuk menghapus file log?")
-        c_log = input("".lower())
-        if c_log == "":
+        print("Apakah anda yakin untuk bersihkan file log? (y / t)")
+        c_log = input("")
+        c_log_2 = c_log.lower()
+        if c_log_2 == "y":
             print("FILE LOG TELAH DIHAPUS")
             print("")
             clear_log()
             input("Tekan ENTER untuk kembali")
             extras()
         else:
-            print("PASSWORD SALAH")
+            print("FILE LOG TIDAK JADI DIHAPUS")
+            print("")
             input("Tekan ENTER untuk kembali")
             extras()
     print("Lainnya".center(50))
