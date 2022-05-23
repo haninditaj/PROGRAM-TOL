@@ -328,15 +328,16 @@ def extras():
             with open('log_data.csv', 'w', newline='') as csv_file:
                 csv_writer = csv.writer(csv_file, delimiter=";")
                 csv_writer.writerow(data)
-        print("Apakah anda yakin untuk bersihkan file log? (y / t)")
+        print("Masukkan password untuk menghapus file log?")
         c_log = input("".lower())
-        if c_log == "y":
+        if c_log == "":
             print("FILE LOG TELAH DIHAPUS")
             print("")
             clear_log()
             input("Tekan ENTER untuk kembali")
             extras()
         else:
+            print("PASSWORD SALAH")
             input("Tekan ENTER untuk kembali")
             extras()
     print("Lainnya".center(50))
@@ -358,4 +359,3 @@ def extras():
         pass
 
 main_menu()
-#end
