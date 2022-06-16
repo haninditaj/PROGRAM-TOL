@@ -39,10 +39,10 @@ def tabel_2():
     print('TABEL DAFTAR'.center(85))
     print('KODE DAN JENIS KENDARAAN'.center(85))
     print('')
-    print(('-'*49).center(85))
+    print(('-'*68).center(85))
     for i in range(len(list_knd)):
-        print(f'| {list_knd[i][0]:^14} | {list_knd[i][1]:^28} |'.center(85))
-        print(('-'*49).center(85))
+        print(f'|{list_knd[i][0]:^14}|{list_knd[i][1]:^24}|{list_knd[i][2]:^26}|'.center(85))
+        print(('-'*68).center(85))
 
 #menu 2
 def mulai_estimasi():
@@ -230,15 +230,8 @@ def mulai_estimasi():
         km = 75 ; kata = "SEMARANG ABC - SOLO PP"
 
     else :
-        km  = 0
-        kata = '''
-        ERROR
-        Periksa kembali kode kota anda!
-        Hint : - Kode kota asal dan kode kota tujuan 
-                TIDAK BOLEH SAMA
-        '''
-
-
+        print("")
+    
     print("")
     print(kata.center(85))
     tarif_golongan()
