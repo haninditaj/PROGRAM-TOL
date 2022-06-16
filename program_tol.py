@@ -25,23 +25,23 @@ with open('data_02_daftar_kendaraan.csv') as csv_file:
 #menu 1 (tabel)
 def tabel_1():
     print('')
-    print('TABEL DAFTAR'.center(50))
-    print('KODE KOTA DAN NAMA KOTA'.center(50))
+    print('TABEL DAFTAR'.center(85))
+    print('KODE KOTA DAN NAMA KOTA'.center(85))
     print('')
-    print('-'*49)
+    print(('-'*49).center(85))
     for i in range(len(list_kota)):
-        print(f'| {list_kota[i][0]:^14} | {list_kota[i][1]:^28} |',)
-        print('-'*49)
+        print(f'| {list_kota[i][0]:^14} | {list_kota[i][1]:^28} |'.center(85))
+        print(('-'*49).center(85))
 
 def tabel_2():
     print('')
-    print('TABEL DAFTAR'.center(50))
-    print('KODE DAN JENIS KENDARAAN'.center(50))
+    print('TABEL DAFTAR'.center(85))
+    print('KODE DAN JENIS KENDARAAN'.center(85))
     print('')
-    print('-'*49)
+    print(('-'*49).center(85))
     for i in range(len(list_knd)):
-        print(f'| {list_knd[i][0]:^14} | {list_knd[i][1]:^28} |',)
-        print('-'*49)
+        print(f'| {list_knd[i][0]:^14} | {list_knd[i][1]:^28} |'.center(85))
+        print(('-'*49).center(85))
 
 #menu 2
 def mulai_estimasi():
@@ -62,7 +62,7 @@ def mulai_estimasi():
             input("Tekan ENTER untuk kembali ke menu utama")
             main_menu()
         kata2 = "ESTIMASI TARIF ADALAH {}".format(tarif)
-        print(kata2.center(50))
+        print(kata2.center(85))
 
 
     kode_plat = str(input("Masukkan nomor plat kendaraan anda : ")).upper()
@@ -232,12 +232,75 @@ def mulai_estimasi():
         '''
 
     print("")
-    print(kata.center(50))
+    print(kata.center(85))
     tarif_golongan()
     print("")
 
-    #Log data
-    data = kode_plat, kode_golongan, kode_kota_asal, kode_kota_tujuan
+    #konversi kode kendaraan
+    if kode_golongan == '1':
+        jenis = "GOLONGAN 1"
+    elif kode_golongan == '2':
+        jenis = "GOLONGAN 2"
+    elif kode_golongan == '3':
+        jenis = "GOLONGAN 3"
+    else:
+        jenis = "INVALID"
+    #konversi kode kota asal
+    if kode_kota_asal == 1:
+        asal = "Jakarta Outer Ring Road"
+    elif kode_kota_asal == 2 :
+        asal = "Jakarta"
+    elif kode_kota_asal == 3 :
+        asal = "Cikampek"
+    elif kode_kota_asal == 4 :
+        asal = "Cikopo"
+    elif kode_kota_asal == 5 :
+        asal = "Palimanan"
+    elif kode_kota_asal == 6 :
+        asal = "Kanci"
+    elif kode_kota_asal == 7 :
+        asal = "Pejagan"
+    elif kode_kota_asal == 8 :
+        asal = "Pemalang"
+    elif kode_kota_asal == 9 :
+        asal = "Batang"
+    elif kode_kota_asal == 10 :
+        asal = "Semarang (Kaliangkung)"
+    elif kode_kota_asal == 11 :
+        asal = "Semarang ABC"
+    elif kode_kota_asal == 12 :
+        asal = "Solo"
+    else:
+        asal = "INVALID"
+    #konversi kode kota tujuan
+    if kode_kota_tujuan == 1:
+        tujuan = "Jakarta Outer Ring Road"
+    elif kode_kota_tujuan == 2 :
+        tujuan = "Jakarta"
+    elif kode_kota_tujuan == 3 :
+        tujuan = "Cikampek"
+    elif kode_kota_tujuan == 4 :
+        tujuan = "Cikopo"
+    elif kode_kota_tujuan == 5 :
+        tujuan = "Palimanan"
+    elif kode_kota_tujuan == 6 :
+        tujuan = "Kanci"
+    elif kode_kota_tujuan == 7 :
+        tujuan = "Pejagan"
+    elif kode_kota_tujuan == 8 :
+        tujuan = "Pemalang"
+    elif kode_kota_tujuan == 9 :
+        tujuan = "Batang"
+    elif kode_kota_tujuan == 10 :
+        tujuan = "Semarang (Kaliangkung)"
+    elif kode_kota_tujuan == 11 :
+        tujuan = "Semarang ABC"
+    elif kode_kota_tujuan == 12 :
+        tujuan = "Solo"
+    else:
+        tujuan = "INVALID"
+    #log data
+    data = kode_plat, jenis, asal, tujuan
     with open('log_data.csv', 'a', newline='') as csv_file:
         csv_writer = csv.writer(csv_file, delimiter=";")
         csv_writer.writerow(data)
@@ -245,23 +308,23 @@ def mulai_estimasi():
 #main menu (menu utama)
 def main_menu():
     print("")
-    print("="*50)
-    print("PROGRAM ESTIMASI BIAYA TOL".center(50))
-    print("RUTE JAKARTA - SOLO".center(50))
-    print("="*50)
+    print("="*85)
+    print("PROGRAM ESTIMASI BIAYA TOL".center(85))
+    print("RUTE JAKARTA - SOLO".center(85))
+    print("="*85)
     print("")
     print("")
-    print("MENU UTAMA".center(50))
+    print("MENU UTAMA".center(85))
     print("")
-    print("Daftar menu :".center(50))
-    print("-------------".center(50))
+    print("Daftar menu :".center(85))
+    print("-------------".center(85))
     print('''
     1. Lihat tabel daftar kode
     2. Mulai estimasi
     3. Lainnya
     4. Keluar
 
-    '''.center(50))
+    '''.center(85))
     input_menu = input("Masukkan angka pada menu pilihan anda : ")
     if input_menu == '1':
         tabel_2()
@@ -271,7 +334,7 @@ def main_menu():
         1. Lanjut ke mulai estimasi
         2. Kembali ke menu utama
 
-        '''.center(50))
+        '''.center(85))
         menu_utama = input("Masukkan angka pada menu pilihan anda : ")
         if menu_utama == '1':
             mulai_estimasi()
@@ -280,7 +343,7 @@ def main_menu():
         elif menu_utama == '2':
             main_menu()
         else:
-            print('!!! PERIKSA INPUT ANDA KEMBALI !!!'.center(50))
+            print('!!! PERIKSA INPUT ANDA KEMBALI !!!'.center(85))
             main_menu()
     elif input_menu == '2':
         mulai_estimasi()
@@ -295,7 +358,7 @@ def main_menu():
         print("PROGRAM DITUTUP")
         print("")       
     else:
-        print('!!! PERIKSA INPUT ANDA KEMBALI !!!'.center(50))
+        print('!!! PERIKSA INPUT ANDA KEMBALI !!!'.center(85))
         main_menu()
 
 #menu 3
@@ -308,25 +371,25 @@ def extras():
                 csv_reader = csv.reader(csv_file, delimiter=";")
                 for row in csv_reader:
                     log_1.append(row)
-            print("="*50)
-            print(f'|{"NOMOR PLAT":<10}|{"KODE GOLONGAN":^14}|{"KOTA ASAL":^10}|{"KOTA TUJUAN":^11}|')
-            print("-"*50)
+            print("="*85)
+            print(f'|{"NOMOR PLAT":^16}|{"KODE GOLONGAN":^14}|{"KOTA ASAL":^25}|{"KOTA TUJUAN":^25}|')
+            print("-"*85)
             for i in range(len(log_1)):
-                print(f'|{log_1[i][0]:<10}|{log_1[i][1]:^14}|{log_1[i][2]:^10}|{log_1[i][3]:^11}|')
-                print("-"*50)
+                print(f'|{log_1[i][0]:^16}|{log_1[i][1]:^14}|{log_1[i][2]:^25}|{log_1[i][3]:^25}|')
+                print("-"*85)
         print("Lihat file log? (y / t)")
         s_log = input("")
         s_log_2 = s_log.lower()
         if s_log_2 == "y":
             print("")
-            print("FILE LOG".center(50))
-            print("-------------".center(50))
+            print("FILE LOG".center(85))
+            print("-------------".center(85))
             print("")
             show_log()
             input("Tekan ENTER untuk kembali")
             extras()
         elif s_log_2 == "t":
-            print("FILE LOG TIDAK JADI DILIHAT".center(50))
+            print("FILE LOG TIDAK JADI DILIHAT".center(85))
             extras()
         else:
             input("Tekan ENTER untuk kembali")
@@ -351,14 +414,14 @@ def extras():
             print("")
             input("Tekan ENTER untuk kembali")
             extras()
-    print("Lainnya".center(50))
-    print("-------------".center(50))
+    print("Lainnya".center(85))
+    print("-------------".center(85))
     print('''
     1. Lihat data log
     2. Hapus data log
     3. Kembali ke menu utama
 
-    '''.center(50))
+    '''.center(85))
     input_extras = input("Masukkan angka pada menu pilihan anda : ")
     if input_extras == "1":
         lihat_log()
@@ -367,7 +430,7 @@ def extras():
     elif input_extras == "3":
         main_menu()
     else:
-        print('!!! PERIKSA INPUT ANDA KEMBALI !!!'.center(50))
+        print('!!! PERIKSA INPUT ANDA KEMBALI !!!'.center(85))
         extras()
 
 #exception
@@ -376,6 +439,6 @@ try:
 except UnboundLocalError:
     pass
 except ValueError:
-    print('!!! PERIKSA INPUT ANDA KEMBALI !!!'.center(50))
+    print('!!! PERIKSA INPUT ANDA KEMBALI !!!'.center(85))
     input("Tekan ENTER untuk kembali ke menu utama")
     main_menu()
