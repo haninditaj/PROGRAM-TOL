@@ -4,7 +4,7 @@
 import os
 
 
-os.chdir(r'C:\Users\LENOVO\Desktop\PROGRAM TOL\data')
+os.chdir(r'data')
 
 import csv
 
@@ -46,28 +46,27 @@ def tabel_2():
 #menu 2
 def mulai_estimasi():
     def tarif_golongan():
-        def total_harga():
-            kata = "ESTIMASI TARIF ADALAH {}".format(tarif_3)
-            print(kata.center(50))
-        if kode_golongan == 1:
-            tarif = 800 * 1 * km
-            tarif_2 = f"{tarif:,}"
-            tarif_3 = "Rp. {} ,-".format(tarif_2)
-        elif kode_golongan == 2:
-            tarif = 800 * 1.5 * km
-            tarif_2 = f"{tarif:,}"
-            tarif_3 = "Rp. {} ,-".format(tarif_2)
-        elif kode_golongan == 3:
-            tarif = 800 * 2 * km
-            tarif_2 = f"{tarif:,}"
-            tarif_3 = "Rp. {} ,-".format(tarif_2)
+        if kode_golongan == '1':
+            tarif = f"Rp. {(800 * 1 * km):,} ,-"
+        elif kode_golongan == '2':
+            tarif = f"Rp. {(800 * 1.5 * km):,} ,-"
+        elif kode_golongan == '3':
+            tarif = f'Rp. {(800 * 2 * km):,} ,-'
         else :
-            print("KODE SALAH".center(50))
-        total_harga()
+            print('''
+        ERROR
+        Periksa kembali kode kendaraan anda!
+        Hint : - Masukkan kode berupa angka
+                 1 sampai dengan 3
+            ''')
+            input("Tekan ENTER untuk kembali ke menu utama")
+            main_menu()
+        kata2 = "ESTIMASI TARIF ADALAH {}".format(tarif)
+        print(kata2.center(50))
 
 
     kode_plat = str(input("Masukkan nomor plat kendaraan anda : ")).upper()
-    kode_golongan = int(input("Masukkan kode golongan kendaraan anda : "))
+    kode_golongan = input("Masukkan kode golongan kendaraan anda : ")
     kode_kota_asal = int(input("Masukkan kode kota asal : "))
     kode_kota_tujuan = int(input("Masukkan kode kota tujuan : "))
 
@@ -263,8 +262,8 @@ def main_menu():
     4. Keluar
 
     '''.center(50))
-    input_menu = int(input("Masukkan angka pada menu pilihan anda : "))
-    if input_menu == 1:
+    input_menu = input("Masukkan angka pada menu pilihan anda : ")
+    if input_menu == '1':
         tabel_2()
         tabel_1()
         print("")
@@ -273,30 +272,31 @@ def main_menu():
         2. Kembali ke menu utama
 
         '''.center(50))
-        menu_utama = int(input("Masukkan angka pada menu pilihan anda : "))
-        if menu_utama == 1:
+        menu_utama = input("Masukkan angka pada menu pilihan anda : ")
+        if menu_utama == '1':
             mulai_estimasi()
-            menu_utama = input("Tekan ENTER untuk kembali ke menu utama")
+            input("Tekan ENTER untuk kembali ke menu utama")
             main_menu()
-        elif menu_utama == 2:
+        elif menu_utama == '2':
             main_menu()
         else:
+            print('!!! PERIKSA INPUT ANDA KEMBALI !!!'.center(50))
             main_menu()
-    elif input_menu == 2:
+    elif input_menu == '2':
         mulai_estimasi()
         print("")
-        menu_utama = input("Tekan ENTER untuk kembali ke menu utama")
-        if menu_utama == '':
-            main_menu()
-        else:
-            main_menu()
-    elif input_menu == 3:
+        input("Tekan ENTER untuk kembali ke menu utama")
+        main_menu()
+    elif input_menu == '3':
         extras()
         print("")
     #menu 4
-    else:
+    elif input_menu == '4':
         print("PROGRAM DITUTUP")
-        print("")
+        print("")       
+    else:
+        print('!!! PERIKSA INPUT ANDA KEMBALI !!!'.center(50))
+        main_menu()
 
 #menu 3
 def extras():
@@ -324,6 +324,9 @@ def extras():
             print("")
             show_log()
             input("Tekan ENTER untuk kembali")
+            extras()
+        elif s_log_2 == "t":
+            print("FILE LOG TIDAK JADI DILIHAT".center(50))
             extras()
         else:
             input("Tekan ENTER untuk kembali")
@@ -356,14 +359,23 @@ def extras():
     3. Kembali ke menu utama
 
     '''.center(50))
-    input_extras = int(input("Masukkan angka pada menu pilihan anda : "))
-    if input_extras == 1:
+    input_extras = input("Masukkan angka pada menu pilihan anda : ")
+    if input_extras == "1":
         lihat_log()
-    elif input_extras == 2:
+    elif input_extras == "2":
         bersihkan_log()
-    elif input_extras == 3:
+    elif input_extras == "3":
         main_menu()
     else:
-        pass
+        print('!!! PERIKSA INPUT ANDA KEMBALI !!!'.center(50))
+        extras()
 
-main_menu()
+#exception
+try:
+    main_menu()
+except UnboundLocalError:
+    pass
+except ValueError:
+    print('!!! PERIKSA INPUT ANDA KEMBALI !!!'.center(50))
+    input("Tekan ENTER untuk kembali ke menu utama")
+    main_menu()
