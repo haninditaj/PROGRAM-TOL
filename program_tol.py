@@ -230,7 +230,18 @@ def mulai_estimasi():
         km = 75 ; kata = "SEMARANG ABC - SOLO PP"
 
     else :
-        print("")
+        print ('''
+        ERROR
+        Periksa kembali kode kota anda!
+        Hint : - Kode kota asal dan kode kota tujuan 
+                 TIDAK BOLEH SAMA
+               - Masukkan kode kota asal dan kode
+                 kota tujuan dengan angka 1 sampai 12
+        ''')
+        input("Tekan ENTER untuk kembali mengulang estimasi")
+        mulai_estimasi()
+        input("Tekan ENTER untuk kembali ke menu utama")
+        main_menu()
     
     print("")
     print(kata.center(85))
