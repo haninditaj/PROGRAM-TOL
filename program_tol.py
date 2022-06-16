@@ -1,6 +1,7 @@
 #PROGRAM TOL
 
 #IMPORT
+from email import header
 import os
 
 
@@ -46,11 +47,11 @@ def tabel_2():
 #menu 2
 def mulai_estimasi():
     def tarif_golongan():
-        if kode_golongan == '1':
+        if kode_golongan == 1:
             tarif = f"Rp. {(800 * 1 * km):,} ,-"
-        elif kode_golongan == '2':
+        elif kode_golongan == 2:
             tarif = f"Rp. {(800 * 1.5 * km):,} ,-"
-        elif kode_golongan == '3':
+        elif kode_golongan == 3:
             tarif = f'Rp. {(800 * 2 * km):,} ,-'
         else :
             print('''
@@ -59,17 +60,23 @@ def mulai_estimasi():
         Hint : - Masukkan kode berupa angka
                  1 sampai dengan 3
             ''')
-            input("Tekan ENTER untuk kembali ke menu utama")
-            main_menu()
+            input("Tekan ENTER untuk kembali mengulang estimasi")
+            mulai_estimasi()
         kata2 = "ESTIMASI TARIF ADALAH {}".format(tarif)
         print(kata2.center(85))
 
-
-    kode_plat = str(input("Masukkan nomor plat kendaraan anda : ")).upper()
-    kode_golongan = input("Masukkan kode golongan kendaraan anda : ")
-    kode_kota_asal = int(input("Masukkan kode kota asal : "))
-    kode_kota_tujuan = int(input("Masukkan kode kota tujuan : "))
-
+    try :
+        kode_plat = str(input("Masukkan nomor plat kendaraan anda : ")).upper()
+        kode_golongan = int(input("Masukkan kode golongan kendaraan anda : "))
+        kode_kota_asal = int(input("Masukkan kode kota asal : "))
+        kode_kota_tujuan = int(input("Masukkan kode kota tujuan : "))
+    except ValueError:
+        print('!!! PERIKSA INPUT ANDA KEMBALI !!!'.center(85))
+        input("Tekan ENTER untuk kembali mengulang estimasi")
+        mulai_estimasi()
+        input("Tekan ENTER untuk kembali ke menu utama")
+        main_menu()
+    
     #cabang1
     if (kode_kota_asal == 1 and  kode_kota_tujuan == 2) or (kode_kota_tujuan == 1 and kode_kota_asal == 2):
         km = 12 ; kata = "JAKARTA OUTER RINGROAD - JAKARTA PP"
@@ -231,17 +238,18 @@ def mulai_estimasi():
                 TIDAK BOLEH SAMA
         '''
 
+
     print("")
     print(kata.center(85))
     tarif_golongan()
     print("")
 
     #konversi kode kendaraan
-    if kode_golongan == '1':
+    if kode_golongan == 1:
         jenis = "GOLONGAN 1"
-    elif kode_golongan == '2':
+    elif kode_golongan == 2:
         jenis = "GOLONGAN 2"
-    elif kode_golongan == '3':
+    elif kode_golongan == 3:
         jenis = "GOLONGAN 3"
     else:
         jenis = "INVALID"
@@ -299,6 +307,7 @@ def mulai_estimasi():
         tujuan = "Solo"
     else:
         tujuan = "INVALID"
+    
     #log data
     data = kode_plat, jenis, asal, tujuan
     with open('log_data.csv', 'a', newline='') as csv_file:
@@ -371,8 +380,6 @@ def extras():
                 csv_reader = csv.reader(csv_file, delimiter=";")
                 for row in csv_reader:
                     log_1.append(row)
-            print("="*85)
-            print(f'|{"NOMOR PLAT":^16}|{"KODE GOLONGAN":^14}|{"KOTA ASAL":^25}|{"KOTA TUJUAN":^25}|')
             print("-"*85)
             for i in range(len(log_1)):
                 print(f'|{log_1[i][0]:^16}|{log_1[i][1]:^14}|{log_1[i][2]:^25}|{log_1[i][3]:^25}|')
@@ -396,7 +403,7 @@ def extras():
             extras()
     def bersihkan_log():
         def clear_log():
-            data = ''
+            data = 'NO PLAT','KODE GOLONGAN','KOTA ASAL','KOTA TUJUAN'
             with open('log_data.csv', 'w', newline='') as csv_file:
                 csv_writer = csv.writer(csv_file, delimiter=";")
                 csv_writer.writerow(data)
@@ -438,7 +445,3 @@ try:
     main_menu()
 except UnboundLocalError:
     pass
-except ValueError:
-    print('!!! PERIKSA INPUT ANDA KEMBALI !!!'.center(85))
-    input("Tekan ENTER untuk kembali ke menu utama")
-    main_menu()
