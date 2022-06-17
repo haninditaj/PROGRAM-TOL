@@ -1,4 +1,6 @@
-Kode Kendaraan;Jenis Kendaraan
-1;Golongan I
-2;Golongan II dan Golongan III
-3;Golongan IV dan Golongan V
+Kode Kendaraan;Golongan Kendaraan;Jenis Kendaraan
+1;Golongan I;Sedan, Jip, Pick Up/Truk Kecil, dan Bus
+2;Golongan II;Truk dengan 2 (dua) gandar
+2;Golongan III;Truk dengan 3 (tiga) gandar
+3;Golongan IV;Truk dengan 4 (empat) gandar
+3;Golongan V;Truk dengan 5 (lima) gandar
