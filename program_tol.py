@@ -38,10 +38,10 @@ def tabel_2():
     print('TABEL DAFTAR'.center(85))
     print('KODE DAN JENIS KENDARAAN'.center(85))
     print('')
-    print(('-'*68).center(85))
+    print(('-'*83).center(85))
     for i in range(len(list_knd)):
-        print(f'|{list_knd[i][0]:^14}|{list_knd[i][1]:^24}|{list_knd[i][2]:^26}|'.center(85))
-        print(('-'*68).center(85))
+        print(f'|{list_knd[i][0]:^14}|{list_knd[i][1]:^24}|{list_knd[i][2]:^41}|'.center(85))
+        print(('-'*83).center(85))
 
 #menu 2
 def mulai_estimasi():
